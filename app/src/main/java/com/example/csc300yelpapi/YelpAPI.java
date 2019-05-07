@@ -5,6 +5,8 @@ import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class YelpAPI extends Thread
@@ -27,20 +29,22 @@ public class YelpAPI extends Thread
             input.close();
             System.out.println("*** DATA: " + data);
 
+            //List<String> tempList = new ArrayList<>();
             JSONObject obj = new JSONObject(data);
             JSONArray businesses = obj.getJSONArray("businesses");
             for(int i = 0; i < businesses.length(); i++)
             {
-                String name = businesses.getJSONObject(i).getString("name");
-                System.out.println("*** " + name);
+                MainActivity.listVals.add(businesses.getJSONObject(i).getString("name"));
             }
 
 
         }
         catch(Exception e)
         {
-            System.out.println("*** " + e.toString());
+            System.out.println("***.***" + e.toString());
+
         }
+
     }
 
 }
